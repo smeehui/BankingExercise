@@ -1,6 +1,7 @@
 package com.huy.app.model;
 
 
+import org.hibernate.annotations.ColumnDefault;
 import org.hibernate.validator.constraints.Range;
 
 import javax.persistence.*;
@@ -36,7 +37,8 @@ public class Customer {
     @Valid
     @Range(min=0,max = 999999999, message = "Balance is not valid")
     private double balance;
-
+    @Column(name = "deleted", nullable = false, columnDefinition = "bit default 0")
+     private boolean deleted;
     public Customer() {
     }
 
@@ -45,13 +47,23 @@ public class Customer {
                     @Valid @NotBlank @Email String email,
                     @Valid @NotBlank String phone,
                     @Valid @NotBlank String address,
-                    double balance) {
+                    double balance,
+                    boolean deleted) {
         this.id = id;
         this.fullName = fullName;
         this.email = email;
         this.phone = phone;
         this.address = address;
         this.balance = balance;
+        this.deleted = deleted;
+    }
+
+    public boolean isDeleted() {
+        return deleted;
+    }
+
+    public void setDeleted(boolean deleted) {
+        this.deleted = deleted;
     }
 
     public double getBalance() {

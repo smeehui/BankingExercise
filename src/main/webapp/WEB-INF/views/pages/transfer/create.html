@@ -1,7 +1,7 @@
 ﻿<!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:tb="http://www.thymeleaf.org">
 <head>
-<title>Upvex - Responsive Admin Dashboard Template</title>
+<title>New transfer</title>
     <th:block th:replace="/layout/head::head"/>
 </head>
 <body>
@@ -35,7 +35,7 @@
                                                             class="mdi mdi-account-circle mr-1">
                                                     </i>
                                                     <span
-                                                            class="d-none d-sm-inline">CustomersDetails</span>
+                                                            class="d-none d-sm-inline">Customers Details</span>
                                                 </a>
                                             </li>
                                             <li class="nav-item">
@@ -45,7 +45,7 @@
                                                             class="mdi mdi-face-profile mr-1">
                                                     </i>
                                                     <span
-                                                            class="d-none d-sm-inline">TransferDetails</span>
+                                                            class="d-none d-sm-inline">Transfer Details</span>
                                                 </a>
                                             </li>
                                             <li class="nav-item">
@@ -75,6 +75,7 @@
                                                                         id="selectSender"
 
                                                                         name="sentCustomer.id">
+                                                                    <option>---Select sender---</option>
                                                                     <option th:each="customer: ${customers}"
                                                                             th:value="${customer.id}"
                                                                             th:text="${customer.fullName}">
@@ -91,6 +92,7 @@
                                                                         id="selectRecipient"
 
                                                                         name="receivedCustomer.id">
+                                                                    <option>---Select recipient---</option>
                                                                     <option th:each="customer: ${customers}"
                                                                             th:value="${customer.id}"
                                                                             th:text="${customer.fullName}">

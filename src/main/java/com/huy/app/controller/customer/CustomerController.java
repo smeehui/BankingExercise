@@ -52,6 +52,19 @@ public class CustomerController {
         return modelAndView;
     }
 
+    @GetMapping("/delete/{id}")
+    public String deleteCustomer(@PathVariable String id) {
+        Long idLong = null;
+        try {
+            idLong = Long.parseLong(id);
+        } catch (NumberFormatException e) {
+        }
+        Customer customer = customerService.findById(idLong);
+        customer.setDeleted(true);
+        customerService.save(customer);
+        return "redirect:/customer";
+    }
+
     @PostMapping("/create")
     public String createNewCustomer(@Valid @ModelAttribute("customer") Customer customer, BindingResult bindingResult, Model model) {
         if (bindingResult.hasErrors()) {

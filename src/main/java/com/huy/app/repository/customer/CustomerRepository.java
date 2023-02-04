@@ -16,7 +16,7 @@ public class CustomerRepository implements ICustomerRepository {
 
     @Override
     public List<Customer> findAll() {
-        TypedQuery<Customer> query = em.createQuery("select c from Customer c", Customer.class);
+        TypedQuery<Customer> query = em.createQuery("select c from Customer c WHERE c.deleted = false", Customer.class);
         return query.getResultList();
     }
 

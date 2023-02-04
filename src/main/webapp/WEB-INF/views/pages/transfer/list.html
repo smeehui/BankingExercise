@@ -1,7 +1,7 @@
 ﻿<!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
-    <title>All Customer</title>
+    <title>Transfer history</title>
     <th:block th:replace="/layout/head::head"/>
 </head>
 
@@ -30,36 +30,7 @@
                     <div class="card">
                         <div class="card-body">
                             <h4 class="header-title">List Transfer</h4>
-                            <table class="table activate-select nowrap" id="state-saving-datatable">
-                                <thead>
-                                <tr class="bg-dark">
-                                    <th>ID</th>
-                                    <th>Sender</th>
-                                    <th>Recipient</th>
-                                    <th class="text-right">Fee rate (%)</th>
-                                    <th class="text-right">Amount</th>
-                                    <th class="text-right">Fee Amount</th>
-                                    <th class="text-right">Total Amount</th>
-                                </tr>
-                                </thead>
-                                <tbody>
-                                <tr role="row"
-                                    th:classappend="${state.odd}?'odd':'even'"
-                                    th:each="transfer, state: ${transfers}">
-                                    <td class="sorting_1" tabindex="0" th:text="${transfer.id}"></td>
-                                    <td th:text="${transfer.sentCustomer}"></td>
-                                    <td th:text="${transfer.receivedCustomer}"></td>
-                                    <td  class="text-right" th:text="${transfer.feeRate + '%'}"></td>
-                                    <td class="text-right" th:text="${#numbers.formatDecimal(transfer.amount,1,'COMMA',0,'POINT')}+' VND'"></td>
-                                    <td class="text-right" th:text="${#numbers.formatDecimal(transfer.feeAmount,1,'COMMA',0,'POINT')}+' VND'"></td>
-                                    <td class="text-right" th:text="${#numbers.formatDecimal(transfer.totalAmount,1,'COMMA',0,'POINT')}+' VND'"></td>
-                                </tr>
-                                </tbody>
-                            </table>
-                            <div  class="col-lg-12 d-flex">
-                                <div class="col-lg-6 text-center font-weight-bolder">Total profit:</div>
-                                <div class="col-lg-6 text-center font-weight-bold" th:text="${#numbers.formatDecimal(profit,1,'COMMA',0,'POINT')}+' VND'"></div>
-                            </div>
+                            <th:block th:replace="layout/fragments/datatables::transfers"/>
                         </div>
                     </div>
                 </div>

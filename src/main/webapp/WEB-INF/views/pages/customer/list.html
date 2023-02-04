@@ -30,34 +30,7 @@
                     <div class="card">
                         <div class="card-body">
                             <h4 class="header-title">List Customers</h4>
-                            <table class="table activate-select nowrap" id="state-saving-datatable">
-                                <thead>
-                                <tr>
-                                    <th>ID</th>
-                                    <th>Name</th>
-                                    <th>Email</th>
-                                    <th>Phone</th>
-                                    <th>Balance</th>
-                                    <th>Address</th>
-                                    <th>Action</th>
-                                </tr>
-                                </thead>
-                                <tbody>
-                                <tr role="row"
-                                    th:classappend="${state.odd}?'odd':'even'"
-                                    th:each="customer, state: ${customers}">
-                                    <td class="sorting_1" tabindex="0" th:text="${customer.id}"></td>
-                                    <td th:text="${customer.fullName}"></td>
-                                    <td th:text="${customer.email}"></td>
-                                    <td th:text="${customer.phone}"></td>
-                                    <td th:text="${#numbers.formatDecimal(customer.balance,1,'COMMA',0,'POINT')}+' VND'"></td>
-                                    <td th:text="${customer.address}"></td>
-                                    <td class="d-flex">
-                                        <a th:href="@{edit/{id}(id=${customer.id})}" class="btn btn-warning"><i class="bi bi-pencil-square"></i></a>
-                                    </td>
-                                </tr>
-                                </tbody>
-                            </table>
+                            <th:block th:replace="layout/fragments/datatables::customers"/>
                         </div>
                     </div>
                 </div>
