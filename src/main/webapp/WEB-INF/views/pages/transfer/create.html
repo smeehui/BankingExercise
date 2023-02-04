@@ -1,0 +1,379 @@
+﻿<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Upvex - Responsive Admin Dashboard Template</title>
+    <th:block th:replace="/layout/head::head"/>
+</head>
+
+<body>
+<!-- Begin page -->
+<div id="wrapper">
+
+    <!-- Topbar Start -->
+    <th:block th:replace="/layout/top_nav::top-nav"/>
+
+    <!-- end Topbar -->
+
+    <!-- ========== Left Sidebar Start ========== -->
+
+    <th:block th:replace="layout/left_side::left-side"/>
+    <!-- Left Sidebar End -->
+
+    <!-- ============================================================== -->
+    <!-- Start Page Content here -->
+    <!-- ============================================================== -->
+
+    <div class="content-page">
+        <div class="content">
+
+            <!-- Start Content-->
+            <div class="row">
+             <div class="container">
+                 <div class="offset-xl-1 col-xl-10">
+                     <div class="card">
+                         <div class="card-body">
+                             <h4 class="header-title mb-3">
+                                 Transfer Details
+                             </h4>
+
+                             <form method="POST" id="create_form" th:object="${transfer}">
+                                 <div id="progressbarwizard">
+                                     <ul
+                                             class="nav nav-pills bg-light nav-justified form-wizard-header mb-3"
+                                     >
+                                         <li class="nav-item">
+                                             <a
+                                                     class="nav-link rounded-0 pt-2 pb-2"
+                                                     data-toggle="tab"
+                                                     href="#account-2"
+                                             >
+                                                 <i
+                                                         class="mdi mdi-account-circle mr-1"
+                                                 ></i>
+                                                 <span
+                                                         class="d-none d-sm-inline"
+                                                 >Customers
+                                                                Details</span
+                                                 >
+                                             </a>
+                                         </li>
+                                         <li class="nav-item">
+                                             <a
+                                                     class="nav-link rounded-0 pt-2 pb-2"
+                                                     data-toggle="tab"
+                                                     href="#profile-tab-2"
+                                             >
+                                                 <i
+                                                         class="mdi mdi-face-profile mr-1"
+                                                 ></i>
+                                                 <span
+                                                         class="d-none d-sm-inline"
+                                                 >Transfer
+                                                                Details</span
+                                                 >
+                                             </a>
+                                         </li>
+                                         <li class="nav-item">
+                                             <a
+                                                     class="nav-link rounded-0 pt-2 pb-2"
+                                                     data-toggle="tab"
+                                                     href="#finish-2"
+                                             >
+                                                 <i
+                                                         class="mdi mdi-checkbox-marked-circle-outline mr-1"
+                                                 ></i>
+                                                 <span
+                                                         class="d-none d-sm-inline"
+                                                 >Comfirmation</span
+                                                 >
+                                             </a>
+                                         </li>
+                                     </ul>
+
+                                     <div
+                                             class="tab-content b-0 mb-0 pt-0"
+                                     >
+                                         <div
+                                                 class="progress mb-3"
+                                                 id="bar"
+                                                 style="height: 7px"
+                                         >
+                                             <div
+                                                     class="bar progress-bar progress-bar-striped progress-bar-animated bg-success"
+                                             ></div>
+                                         </div>
+
+                                         <div
+                                                 class="tab-pane"
+                                                 id="account-2"
+                                         >
+                                             <div class="row">
+                                                 <div class="col-12">
+                                                     <div
+                                                             class="form-group row mb-3"
+                                                     >
+                                                         <label
+                                                                 class="col-md-3 col-form-label"
+                                                                 for="selectSender"
+                                                         >Sender</label
+                                                         >
+                                                         <div
+                                                                 class="col-md-9"
+                                                         >
+                                                             <select
+                                                                     class="form-control"
+                                                                     id="selectSender"
+                                                                     name="sentCustomer.id"
+                                                             >
+                                                                 <option th:each="customer: ${customers}" th:value="${customer.id}" th:text="${customer.fullName}">
+                                                                 </option>
+                                                             </select>
+                                                         </div>
+                                                     </div>
+                                                     <div
+                                                             class="form-group row mb-3"
+                                                     >
+                                                         <label
+                                                                 class="col-md-3 col-form-label"
+                                                                 for="selectRecipient"
+                                                         >Recipient</label
+                                                         >
+                                                         <div
+                                                                 class="col-md-9"
+                                                         >
+                                                             <select
+                                                                     class="form-control"
+                                                                     id="selectRecipient"
+                                                                     name="receivedCustomer.id"
+                                                             >
+                                                                 <option th:each="customer: ${customers}" th:value="${customer.id}" th:text="${customer.fullName}">
+                                                                 </option>
+                                                             </select>
+                                                         </div>
+                                                     </div>
+                                                 </div>
+                                                 <!-- end col -->
+                                             </div>
+                                             <!-- end row -->
+                                         </div>
+
+                                         <div
+                                                 class="tab-pane"
+                                                 id="profile-tab-2"
+                                         >
+                                             <div class="row">
+                                                 <div class="col-12">
+                                                     <div
+                                                             class="form-group row mb-3"
+                                                     >
+                                                         <label
+                                                                 class="col-md-3 col-form-label"
+                                                                 for="inputAmount"
+                                                         >
+                                                             Amount
+                                                         </label>
+                                                         <div
+                                                                 class="col-md-9"
+                                                         >
+                                                             <input
+                                                                     class="form-control"
+                                                                     id="inputAmount"
+                                                                     name="amount"
+                                                                     step="any"
+                                                                     type="number"
+                                                             />
+                                                         </div>
+                                                     </div>
+                                                     <div
+                                                             class="form-group row mb-3"
+                                                     >
+                                                         <label
+                                                                 class="col-md-3 col-form-label"
+                                                                 for="inputFee"
+                                                         >
+                                                             Fee (%)
+                                                         </label>
+                                                         <div
+                                                                 class="col-md-9"
+                                                         >
+                                                             <input
+                                                                     class="form-control"
+                                                                     id="inputFee"
+                                                                     name="feeRate"
+                                                                     step="any"
+                                                                     type="number"
+                                                             />
+                                                         </div>
+                                                     </div>
+                                                     <div
+                                                             class="form-group row mb-3"
+                                                     >
+                                                         <label
+                                                                 class="col-md-3 col-form-label"
+                                                                 for="inputTotal"
+                                                         >
+                                                             Total
+                                                         </label>
+                                                         <div
+                                                                 class="col-md-9"
+                                                         >
+                                                             <input
+                                                                     class="form-control"
+                                                                     readonly
+                                                                     id="inputTotal"
+                                                                     name="totalAmount"
+                                                                     step="any"
+                                                                     type="number"
+                                                             />
+                                                         </div>
+                                                     </div>
+                                                 </div>
+                                                 <!-- end col -->
+                                             </div>
+                                             <!-- end row -->
+                                         </div>
+
+                                         <div
+                                                 class="tab-pane"
+                                                 id="finish-2"
+                                         >
+                                             <div class="row">
+                                                 <div class="col-12">
+                                                     <div
+                                                             class="text-center"
+                                                     >
+                                                         <h2
+                                                                 class="mt-0"
+                                                         >
+                                                             <i
+                                                                     class="mdi mdi-check-all"
+                                                             ></i>
+                                                         </h2>
+                                                         <h3
+                                                                 class="mt-0"
+                                                         >
+                                                             Thank
+                                                             you !
+                                                         </h3>
+
+                                                         <p
+                                                                 class="w-75 mb-2 mx-auto"
+                                                         >
+                                                             Quisque
+                                                             nec
+                                                             turpis
+                                                             at urna
+                                                             dictum
+                                                             luctus.
+                                                             Suspendisse
+                                                             convallis
+                                                             dignissim
+                                                             eros at
+                                                             volutpat.
+                                                             In
+                                                             egestas
+                                                             mattis
+                                                             dui.
+                                                             Aliquam
+                                                             mattis
+                                                             dictum
+                                                             aliquet.
+                                                         </p>
+
+                                                         <div
+                                                                 class="mb-3"
+                                                         >
+                                                             <div
+                                                                     class="custom-control custom-checkbox"
+                                                             >
+                                                                 <input
+                                                                         class="custom-control-input"
+                                                                         id="customCheck3"
+                                                                         type="checkbox"
+                                                                 />
+                                                                 <label
+                                                                         class="custom-control-label"
+                                                                         for="customCheck3"
+                                                                 >I
+                                                                     agree
+                                                                     with
+                                                                     the
+                                                                     Terms
+                                                                     and
+                                                                     Conditions</label
+                                                                 >
+                                                             </div>
+                                                         </div>
+                                                     </div>
+                                                 </div>
+                                                 <!-- end col -->
+                                             </div>
+                                             <!-- end row -->
+                                         </div>
+
+                                         <ul
+                                                 class="list-inline mb-0 wizard"
+                                         >
+                                             <li
+                                                     class="previous list-inline-item"
+                                                     onclick="clickNavBtn()"
+                                             >
+                                                 <a
+                                                         class="btn btn-light"
+                                                 >Previous</a
+                                                 >
+                                             </li>
+                                             <li
+                                                     class="next list-inline-item float-right next-btn"
+                                                     onclick="clickNavBtn()"
+                                             >
+                                                 <a
+                                                         class="btn btn-light"
+                                                 >Next</a
+                                                 >
+                                             </li>
+                                         </ul>
+                                     </div>
+                                     <!-- tab-content -->
+                                 </div>
+                                 <th:block th:if="${#fields.hasAnyErrors()}">
+                                     <th:block th:replace="layout/script::toast-trigger"/>
+                                 </th:block>
+                                 <!-- end #progressbarwizard-->
+                                 <th:block th:replace="layout/fragments/toast-notify::toast"/>
+                             </form>
+                         </div>
+                         <!-- end card-body -->
+                     </div>
+                     <!-- end card-->
+                 </div>
+             </div>
+            </div>
+
+        </div> <!-- content -->
+
+        <!-- Footer Start -->
+        <th:block th:replace="layout/footer::footer"/>
+        <!-- end Footer -->
+
+    </div>
+
+    <!-- ============================================================== -->
+    <!-- End Page content -->
+    <!-- ============================================================== -->
+
+
+</div>
+<!-- END wrapper -->
+
+<!-- Right Sidebar -->
+
+
+<!-- /Right-bar -->
+
+<th:block th:replace="layout/script::vendor"/>
+<th:block th:replace="layout/script::form-wizard"/>
+<th:block th:replace="layout/script::bootsrap"/>
+<th:block th:replace="layout/script::progress"/>
+</body>
+</html>

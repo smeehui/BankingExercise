@@ -1,0 +1,97 @@
+﻿<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>All Customer</title>
+    <th:block th:replace="/layout/head::head"/>
+</head>
+
+<body>
+<!-- Begin page -->
+<div id="wrapper">
+
+    <!-- Topbar Start -->
+    <th:block th:replace="/layout/top_nav::top-nav"/>
+
+    <!-- end Topbar -->
+
+    <!-- ========== Left Sidebar Start ========== -->
+
+    <th:block th:replace="layout/left_side::left-side"/>
+    <!-- Left Sidebar End -->
+
+    <!-- ============================================================== -->
+    <!-- Start Page Content here -->
+    <!-- ============================================================== -->
+
+    <div class="content-page">
+        <div class="content">
+            <div class="row">
+                <div class="col-12">
+                    <div class="card">
+                        <div class="card-body">
+                            <h4 class="header-title">List Customers</h4>
+                            <table class="table activate-select nowrap" id="state-saving-datatable">
+                                <thead>
+                                <tr>
+                                    <th>ID</th>
+                                    <th>Name</th>
+                                    <th>Email</th>
+                                    <th>Phone</th>
+                                    <th>Balance</th>
+                                    <th>Address</th>
+                                    <th>Action</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <tr role="row"
+                                    th:classappend="${state.odd}?'odd':'even'"
+                                    th:each="customer, state: ${customers}">
+                                    <td class="sorting_1" tabindex="0" th:text="${customer.id}"></td>
+                                    <td th:text="${customer.fullName}"></td>
+                                    <td th:text="${customer.email}"></td>
+                                    <td th:text="${customer.phone}"></td>
+                                    <td th:text="${#numbers.formatDecimal(customer.balance,1,'COMMA',0,'POINT')}+' VND'"></td>
+                                    <td th:text="${customer.address}"></td>
+                                    <td class="d-flex">
+                                        <a th:href="@{edit/{id}(id=${customer.id})}" class="btn btn-warning"><i class="bi bi-pencil-square"></i></a>
+                                    </td>
+                                </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div> <!-- end card body-->
+        </div> <!-- end card -->
+    </div>
+    <!-- end col-->
+</div>
+
+
+</div> <!-- content -->
+
+<!-- Footer Start -->
+<th:block th:replace="layout/footer::footer"/>
+<!-- end Footer -->
+
+</div>
+
+<!-- ============================================================== -->
+<!-- End Page content -->
+<!-- ============================================================== -->
+
+
+</div>
+<!-- END wrapper -->
+
+<!-- Right Sidebar -->
+
+
+<!-- /Right-bar -->
+
+<th:block th:replace="layout/script::vendor"/>
+<th:block th:replace="layout/script::datatable"/>
+<th:block th:replace="layout/script::bootsrap"/>
+
+</body>
+</html>

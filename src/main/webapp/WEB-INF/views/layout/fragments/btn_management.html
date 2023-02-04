@@ -1,0 +1,8 @@
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+  <th:block th:fragment="button">
+    <div th:switch="${view}" class="form-group mb-3 col-lg-12">
+      <input th:case="'create'" type="submit" value="Create" class="btn btn-success">
+      <input th:case="'edit'" type="submit" value="Edit" class="btn btn-success">
+    </div>
+  </th:block>
+</html>

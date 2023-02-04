@@ -1,0 +1,61 @@
+﻿<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <title>Upvex - Responsive Admin Dashboard Template</title>
+        <th:block th:replace="/layout/head::head"/>
+    </head>
+
+    <body>
+        <!-- Begin page -->
+        <div id="wrapper">
+
+            <!-- Topbar Start -->
+            <th:block th:replace="/layout/top_nav::top-nav"/>
+
+            <!-- end Topbar -->
+
+            <!-- ========== Left Sidebar Start ========== -->
+
+            <th:block th:replace="layout/left_side::left-side"/>
+            <!-- Left Sidebar End -->
+
+            <!-- ============================================================== -->
+            <!-- Start Page Content here -->
+            <!-- ============================================================== -->
+
+            <div class="content-page">
+                <div class="content">
+
+                    <!-- Start Content-->
+                    <div class="container-fluid">
+
+<!--                                Content      -->
+                    </div> <!-- container -->
+
+                </div> <!-- content -->
+
+                <!-- Footer Start -->
+                <th:block th:replace="layout/footer::footer"/>
+                <!-- end Footer -->
+
+            </div>
+
+            <!-- ============================================================== -->
+            <!-- End Page content -->
+            <!-- ============================================================== -->
+
+
+        </div>
+        <!-- END wrapper -->
+
+        <!-- Right Sidebar -->
+
+
+        <!-- /Right-bar -->
+
+        <th:block th:replace="layout/script::vendor"/>
+        <th:block th:replace="layout/script::jquery"/>
+        <th:block th:replace="layout/script::bootsrap"/>
+
+    </body>
+</html>

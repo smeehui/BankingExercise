@@ -1,0 +1,103 @@
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<th:block th:fragment="right-side">
+    <div class="right-bar">
+        <div class="rightbar-title">
+            <a class="right-bar-toggle float-right" href="javascript:void(0);">
+                <i class="mdi mdi-close"></i>
+            </a>
+            <h5 class="m-0 text-white">Settings</h5>
+        </div>
+        <div class="slimscroll-menu">
+            <!-- User box -->
+            <div class="user-box">
+                <div class="user-img">
+                    <img alt="user-img" class="rounded-circle img-fluid" src="/assets/images/users/user-1.jpg"
+                         title="Mat Helme">
+                    <a class="user-edit" href="javascript:void(0);"><i class="mdi mdi-pencil"></i></a>
+                </div>
+
+                <h5><a href="javascript: void(0);">Marcia J. Melia</a></h5>
+                <p class="text-muted mb-0"><small>Product Owner</small></p>
+            </div>
+
+            <!-- Settings -->
+            <hr class="mt-0">
+            <div class="row">
+                <div class="col-6 text-center">
+                    <h4 class="mb-1 mt-0">8,504</h4>
+                    <p class="m-0">Balance</p>
+                </div>
+                <div class="col-6 text-center">
+                    <h4 class="mb-1 mt-0">8,504</h4>
+                    <p class="m-0">Balance</p>
+                </div>
+            </div>
+            <hr class="mb-0">
+
+            <div class="p-3">
+                <div class="custom-control custom-switch mb-2">
+                    <input checked="" class="custom-control-input" id="customSwitch1" type="checkbox">
+                    <label class="custom-control-label" for="customSwitch1">Notifications</label>
+                </div>
+                <div class="custom-control custom-switch mb-2">
+                    <input class="custom-control-input" id="customSwitch2" type="checkbox">
+                    <label class="custom-control-label" for="customSwitch2">API Access</label>
+                </div>
+                <div class="custom-control custom-switch mb-2">
+                    <input checked="" class="custom-control-input" id="customSwitch3" type="checkbox">
+                    <label class="custom-control-label" for="customSwitch3">Auto Updates</label>
+                </div>
+                <div class="custom-control custom-switch mb-2">
+                    <input checked="" class="custom-control-input" id="customSwitch4" type="checkbox">
+                    <label class="custom-control-label" for="customSwitch4">Online Status</label>
+                </div>
+            </div>
+
+            <!-- Timeline -->
+            <hr class="mt-0">
+            <h5 class="pl-3 pr-3">Messages <span class="float-right badge badge-pill badge-danger">25</span></h5>
+            <hr class="mb-0">
+            <div class="p-3">
+                <div class="inbox-widget">
+                    <div class="inbox-item">
+                        <div class="inbox-item-img"><img alt="" class="rounded-circle"
+                                                         src="/assets/images/users/user-2.jpg"></div>
+                        <p class="inbox-item-author"><a class="text-dark" href="javascript: void(0);">Tomaslau</a></p>
+                        <p class="inbox-item-text">I've finished it! See you so...</p>
+                    </div>
+                    <div class="inbox-item">
+                        <div class="inbox-item-img"><img alt="" class="rounded-circle"
+                                                         src="/assets/images/users/user-3.jpg"></div>
+                        <p class="inbox-item-author"><a class="text-dark" href="javascript: void(0);">Stillnotdavid</a>
+                        </p>
+                        <p class="inbox-item-text">This theme is awesome!</p>
+                    </div>
+                    <div class="inbox-item">
+                        <div class="inbox-item-img"><img alt="" class="rounded-circle"
+                                                         src="/assets/images/users/user-4.jpg"></div>
+                        <p class="inbox-item-author"><a class="text-dark" href="javascript: void(0);">Kurafire</a></p>
+                        <p class="inbox-item-text">Nice to meet you</p>
+                    </div>
+
+                    <div class="inbox-item">
+                        <div class="inbox-item-img"><img alt="" class="rounded-circle"
+                                                         src="/assets/images/users/user-5.jpg"></div>
+                        <p class="inbox-item-author"><a class="text-dark" href="javascript: void(0);">Shahedk</a></p>
+                        <p class="inbox-item-text">Hey! there I'm available...</p>
+                    </div>
+                    <div class="inbox-item">
+                        <div class="inbox-item-img"><img alt="" class="rounded-circle"
+                                                         src="/assets/images/users/user-6.jpg"></div>
+                        <p class="inbox-item-author"><a class="text-dark" href="javascript: void(0);">Adhamdannaway</a>
+                        </p>
+                        <p class="inbox-item-text">This theme is awesome!</p>
+                    </div>
+                </div> <!-- end inbox-widget -->
+            </div> <!-- end .p-3-->
+
+        </div> <!-- end slimscroll-menu-->
+    </div>
+    <!-- Right bar overlay-->
+    <div class="rightbar-overlay"></div>
+</th:block>
+</html>

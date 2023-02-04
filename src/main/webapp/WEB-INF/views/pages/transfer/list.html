@@ -1,0 +1,95 @@
+﻿<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>All Customer</title>
+    <th:block th:replace="/layout/head::head"/>
+</head>
+
+<body>
+<!-- Begin page -->
+<div id="wrapper">
+
+    <!-- Topbar Start -->
+    <th:block th:replace="/layout/top_nav::top-nav"/>
+
+    <!-- end Topbar -->
+
+    <!-- ========== Left Sidebar Start ========== -->
+
+    <th:block th:replace="layout/left_side::left-side"/>
+    <!-- Left Sidebar End -->
+
+    <!-- ============================================================== -->
+    <!-- Start Page Content here -->
+    <!-- ============================================================== -->
+
+    <div class="content-page">
+        <div class="content">
+            <div class="row">
+                <div class="col-12">
+                    <div class="card">
+                        <div class="card-body">
+                            <h4 class="header-title">List Customers</h4>
+                            <table class="table activate-select nowrap" id="state-saving-datatable">
+                                <thead>
+                                <tr>
+                                    <th>ID</th>
+                                    <th>Sender</th>
+                                    <th>Recipient</th>
+                                    <th class="text-right">Fee rate (%)</th>
+                                    <th class="text-right">Amount</th>
+                                    <th class="text-right">Fee Amount</th>
+                                    <th class="text-right">Total Amount</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <tr role="row"
+                                    th:classappend="${state.odd}?'odd':'even'"
+                                    th:each="transfer, state: ${transfers}">
+                                    <td class="sorting_1" tabindex="0" th:text="${transfer.id}"></td>
+                                    <td th:text="${transfer.sentCustomer}"></td>
+                                    <td th:text="${transfer.receivedCustomer}"></td>
+                                    <td  class="text-right" th:text="${transfer.feeRate + '%'}"></td>
+                                    <td class="text-right" th:text="${#numbers.formatDecimal(transfer.amount,6,'COMMA',0,'POINT')}+' VND'"></td>
+                                    <td class="text-right" th:text="${#numbers.formatDecimal(transfer.feeAmount,6,'COMMA',0,'POINT')}+' VND'"></td>
+                                    <td class="text-right" th:text="${#numbers.formatDecimal(transfer.totalAmount,6,'COMMA',0,'POINT')}+' VND'"></td>
+                                </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div> <!-- end card body-->
+        </div> <!-- end card -->
+    </div>
+    <!-- end col-->
+</div>
+
+
+</div> <!-- content -->
+
+<!-- Footer Start -->
+<th:block th:replace="layout/footer::footer"/>
+<!-- end Footer -->
+
+</div>
+
+<!-- ============================================================== -->
+<!-- End Page content -->
+<!-- ============================================================== -->
+
+
+</div>
+<!-- END wrapper -->
+
+<!-- Right Sidebar -->
+
+
+<!-- /Right-bar -->
+
+<th:block th:replace="layout/script::vendor"/>
+<th:block th:replace="layout/script::datatable"/>
+<th:block th:replace="layout/script::bootsrap"/>
+
+</body>
+</html>

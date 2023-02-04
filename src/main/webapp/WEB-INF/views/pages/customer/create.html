@@ -1,0 +1,93 @@
+﻿<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Create New Customer</title>
+    <th:block th:replace="/layout/head::head"/>
+</head>
+
+<body>
+<!-- Begin page -->
+<div id="wrapper">
+
+    <!-- Topbar Start -->
+    <th:block th:replace="/layout/top_nav::top-nav"/>
+
+    <!-- end Topbar -->
+
+    <!-- ========== Left Sidebar Start ========== -->
+
+    <th:block th:replace="layout/left_side::left-side"/>
+    <!-- Left Sidebar End -->
+
+    <!-- ============================================================== -->
+    <!-- Start Page Content here -->
+    <!-- ============================================================== -->
+
+    <div class="content-page">
+        <div class="content">
+
+            <!-- Start Content-->
+            <div class="row" style="position: relative">
+                <div class="container mt-5 border border-light p-2">
+                    <h4 class="header-title mb-3"> Create New Customer</h4>
+                    <form th:object="${customer}" method="post" class="d-flex flex-column">
+                        <th:block th:if="${#fields.hasAnyErrors()}">
+                            <th:block th:replace="layout/script::toast-trigger"/>
+                        </th:block>
+                        <div class="row  col-lg-12">
+                            <div class="form-group mb-3 col-lg-6">
+                                <label for="inputName">Full name</label>
+                                <input type="text" id="inputName" class="form-control" th:field="*{fullName}" name="fullName" placeholder="Full name..." th:value="*{fullName}">
+                            </div>
+
+                            <div class="form-group mb-3 col-lg-6">
+                                <label for="example-email">Email</label>
+                                <input type="email" id="example-email" name="email" class="form-control" th:field="*{email}" placeholder="Email..." th:value="*{email}">
+                            </div>
+                        </div>
+                       <div class="row  col-lg-12">
+                           <div class="form-group mb-3 col-lg-6">
+                               <label for="inputPhone">Phone number</label>
+                               <input type="tel" id="inputPhone" name="phone" class="form-control" th:field="*{phone}" placeholder="Phone number..." th:value="*{phone}">
+                           </div>
+                           <div class="form-group mb-3 col-lg-6">
+                               <label for="inputAddress">Address</label>
+                               <input type="text" id="inputAddress" class="form-control" th:field="*{address}" placeholder="Address..." th:value="*{address}" name="address">
+                           </div>
+                       </div>
+                        <th:block th:replace="layout/fragments/edit_balance::input-balance(balance = *{balance})" />
+                        <div class="row col-lg-12">
+                            <th:block th:replace="layout/fragments/btn_management::button"/>
+                        </div>
+
+                        <th:block th:replace="layout/fragments/toast-notify::toast"/>
+                    </form>
+                </div> <!-- end col -->
+            </div>
+
+        </div> <!-- content -->
+
+        <!-- Footer Start -->
+        <th:block th:replace="layout/footer::footer"/>
+        <!-- end Footer -->
+
+    </div>
+
+    <!-- ============================================================== -->
+    <!-- End Page content -->
+    <!-- ============================================================== -->
+
+
+</div>
+<!-- END wrapper -->
+
+<!-- Right Sidebar -->
+
+
+<!-- /Right-bar -->
+
+<th:block th:replace="layout/script::vendor"/>
+<th:block th:replace="layout/script::form-wizard"/>
+<th:block th:replace="layout/script::bootsrap"/>
+</body>
+</html>
