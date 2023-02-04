@@ -28,7 +28,6 @@ public class Transfer {
     @Range(min = 10000,max = 1000000000, message = "Transfer amount must be from 10000 to 1 billion")
     private double amount;
     @NotNull(message = "The amount is not valid")
-    @Range(min = 1,max =50 , message = "Transfer fee must be from 1 to 50 percent")
     private double feeAmount;
     @NotNull(message = "The total amount is not valid")
     private double totalAmount;

@@ -1,9 +1,11 @@
 package com.huy.app.repository.transfer;
 
+import com.huy.app.model.Transfer;
 import com.huy.app.model.TransferDTO;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.TypedQuery;
 import java.util.List;
 
 public class TransferDTORepository implements ITransferDTORepository{
@@ -28,4 +30,5 @@ public class TransferDTORepository implements ITransferDTORepository{
     public void remove(Long id) {
 
     }
+
 }

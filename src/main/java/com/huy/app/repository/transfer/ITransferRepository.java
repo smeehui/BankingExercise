@@ -4,4 +4,5 @@ import com.huy.app.model.Transfer;
 import com.huy.app.repository.IGeneralRepository;
 
 public interface ITransferRepository extends IGeneralRepository<Transfer> {
+    public Double getProfit();
 }

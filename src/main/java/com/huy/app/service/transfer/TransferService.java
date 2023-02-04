@@ -31,4 +31,9 @@ public class TransferService implements ITransferService {
     public void remove(Long id) {
         transferRepository.remove(id);
     }
+
+    @Override
+    public Double getProfit() {
+        return transferRepository.getProfit();
+    }
 }

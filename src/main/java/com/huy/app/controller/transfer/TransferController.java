@@ -1,5 +1,6 @@
 package com.huy.app.controller.transfer;
 
+import com.huy.app.model.Customer;
 import com.huy.app.model.Transfer;
 import com.huy.app.model.TransferDTO;
 import com.huy.app.service.customer.ICustomerService;
@@ -9,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
+import org.springframework.validation.ObjectError;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -30,6 +32,7 @@ public class TransferController {
         ModelAndView modelAndView = new ModelAndView("pages/transfer/list");
         List<TransferDTO> allTransfers = transferDTOService.findAll();
         modelAndView.addObject("transfers", allTransfers);
+        modelAndView.addObject("profit", transferService.getProfit());
         return modelAndView;
     }
     @GetMapping("/create")
@@ -44,12 +47,24 @@ public class TransferController {
     public String createCustomer(@Valid @ModelAttribute Transfer transfer, BindingResult bindingResult, Model model) {
 
         model.addAttribute("customers", customerService.findAll());
+        Customer sentCustomer = customerService.findById(transfer.getSentCustomer().getId());
+        Customer receivedCustomer = customerService.findById(transfer.getReceivedCustomer().getId());
+        if (sentCustomer.getId().equals(receivedCustomer.getId())) {
+            bindingResult.rejectValue("sentCustomer","error.customer","ID must be different");
+        }
+        if (sentCustomer.getBalance()< transfer.getTotalAmount()){
+            bindingResult.rejectValue("sentCustomer","error.customer","Sender's balance is not enough");
+        }
         if (bindingResult.hasErrors()) {
             model.addAttribute("transfer", transfer);
             return "/pages/transfer/create";
         }else {
+            sentCustomer.setBalance(sentCustomer.getBalance() - transfer.getTotalAmount());
+            receivedCustomer.setBalance(receivedCustomer.getBalance() + transfer.getAmount());
+            customerService.save(sentCustomer);
+            customerService.save(receivedCustomer);
             transferService.save(transfer);
-            return "redirect:/";
+            return "redirect:/transfer";
         }
     }
 }

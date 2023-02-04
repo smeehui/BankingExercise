@@ -38,4 +38,10 @@ public class TransferRepository implements ITransferRepository {
     public void remove(Long id) {
 
     }
+
+    @Override
+    public Double getProfit() {
+        List<Double> resultList = em.createQuery("SELECT SUM(feeAmount) AS profit FROM Transfer", Double.class).getResultList();
+        return resultList.get(0);
+    }
 }
