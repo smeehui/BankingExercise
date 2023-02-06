@@ -10,7 +10,9 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.validation.Valid;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @Controller
 @RequestMapping("/customer")
@@ -32,11 +34,9 @@ public class CustomerController {
     }
 
     @GetMapping("/create")
-    public ModelAndView showCreatingCustomerForm() {
-        ModelAndView modelAndView = new ModelAndView("pages/customer/create");
-        modelAndView.addObject("customer", new Customer());
-        modelAndView.addObject("view", "create");
-        return modelAndView;
+    public String showCreatingCustomerForm(Model model) {
+        initPageAttrs(model, new Customer(), "create");
+        return "pages/customer/create";
     }
 
     @GetMapping("/edit/{id}")
@@ -68,14 +68,19 @@ public class CustomerController {
     @PostMapping("/create")
     public String createNewCustomer(@Valid @ModelAttribute("customer") Customer customer, BindingResult bindingResult, Model model) {
         if (bindingResult.hasErrors()) {
-            model.addAttribute("customer", customer);
-            model.addAttribute("view", "create");
+            initPageAttrs(model, customer, "create");
             return "pages/customer/create";
         } else {
             customerService.save(customer);
-            model.addAttribute("message", "New customer created successfully");
-            return "redirect:/customer/create";
+            initPageAttrs(model, new Customer(), "create");
+            model.addAttribute("success", "New customer created successfully");
+            return "pages/customer/create";
         }
+    }
+
+    private static void initPageAttrs(Model model, Customer attributeValue, String create) {
+        model.addAttribute("customer", attributeValue);
+        model.addAttribute("view", create);
     }
 
     @PostMapping("/edit/{id}")
@@ -88,8 +93,7 @@ public class CustomerController {
         }
         customer.setId(idLong);
         if (bindingResult.hasErrors()) {
-            model.addAttribute("customer", customer);
-            model.addAttribute("view", "edit");
+            initPageAttrs(model, customer, "edit");
             return "/pages/customer/create";
         }else {
             customerService.save(customer); customerService.save(customer);

@@ -192,11 +192,10 @@
                                         </div>
                                         <!-- tab-content -->
                                     </div>
-                                    <th:block th:if="${#fields.hasAnyErrors()}">
-                                        <th:block th:replace="layout/script::toast-trigger"/>
-                                    </th:block>
                                     <!-- end #progressbarwizard-->
-                                    <th:block th:replace="layout/fragments/toast-notify::toast"/>
+                                    <th:block th:replace="layout/fragments/toast-notify::error-toast"/>
+                                    <th:block th:replace="layout/fragments/toast-notify::success-toast(${success})"/>
+
                                 </form>
                             </div>
                             <!-- end card-body -->

@@ -38,11 +38,14 @@ public class TransferController {
         return modelAndView;
     }
     @GetMapping("/create")
-    public ModelAndView showTransferPage() {
-        ModelAndView modelAndView = new ModelAndView("/pages/transfer/create");
-        modelAndView.addObject("customers", customerService.findAll());
-        modelAndView.addObject("transfer", new Transfer());
-        return modelAndView;
+    public String showTransferPage(Model model) {
+        addAttr(model);
+        return "/pages/transfer/create";
+    }
+
+    private void addAttr(Model model) {
+        model.addAttribute("customers", customerService.findAll());
+        model.addAttribute("transfer", new Transfer());
     }
 
     @PostMapping("/create")
@@ -69,12 +72,14 @@ public class TransferController {
             model.addAttribute("transfer", transfer);
             return "/pages/transfer/create";
         }else {
+            transferService.save(transfer);
             sentCustomer.setBalance(sentCustomer.getBalance() - transfer.getTotalAmount());
             receivedCustomer.setBalance(receivedCustomer.getBalance() + transfer.getAmount());
             customerService.save(sentCustomer);
             customerService.save(receivedCustomer);
-            transferService.save(transfer);
-            return "redirect:/transfer";
+            model.addAttribute("success", "New transfer is created successfully");
+            addAttr(model);
+            return "/pages/transfer/create";
         }
     }
 }

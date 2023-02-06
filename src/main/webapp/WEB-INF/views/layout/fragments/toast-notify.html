@@ -1,23 +1,75 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
-<th:block th:fragment="toast">
-  <div style="position: absolute; top: 0; right: 0;">
+<th:block th:fragment="error-toast">
+    <div style="position: absolute; top: 0; right: 0;overflow:scroll">
 
-    <th:block th:each="err:${#fields.allDetailedErrors()}">
-      <div class="toast fade show" role="alert" aria-live="assertive" aria-atomic="true" data-toggle="toast">
-        <div class="toast-header">
-          <img src="/assets/images/logo-sm.png" alt="brand-logo" height="14" class="mr-1">
-          <strong class="mr-auto" th:text="${err.getFieldName()}"></strong>
-          <small class="text-muted">just now</small>
-          <button type="button" class="ml-2 mb-1 close" data-dismiss="toast" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-          </button>
+        <th:block th:each="err:${#fields.allDetailedErrors()}">
+            <div class="toast fade show border-danger" role="alert" aria-live="assertive" aria-atomic="true"
+                 data-toggle="toast">
+                <div class="toast-header">
+                    <img src="/assets/images/logo-sm.png" alt="brand-logo" height="14" class="mr-1">
+                    <strong class="mr-auto text-danger" th:text="${err.getFieldName()}"></strong>
+                    <small class="text-muted">just now</small>
+                    <button type="button" class="ml-2 mb-1 close" data-dismiss="toast" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="toast-body" th:text="${err.getMessage()}">
+                </div>
+            </div>
+        </th:block>
+        <!-- Then put toasts within -->
+        <!--end toast-->
+    </div>
+    <script>
+        let showToast = () => {
+            let toast = document.querySelectorAll(".toast");
+            toast.forEach(el => {
+                let toastEl = new bootstrap.Toast(el, {
+                    animation: true,
+                    autohide: true,
+                    delay: 4000
+                })
+                toastEl.show();
+            })
+        }
+        window.onload = () => {
+            showToast();
+        }
+    </script>
+</th:block>
+<th:block th:fragment="success-toast(success)">
+    <th:block th:if="${success!=null}">
+        <div style="position: absolute; top: 0; right: 0;">
+            <div class="success-toast toast fade show border-success" role="alert" aria-live="assertive"
+                 aria-atomic="true"
+                 data-toggle="toast">
+                <div class="toast-header">
+                    <img src="/assets/images/logo-sm.png" alt="brand-logo" height="14" class="mr-1">
+                    <strong class="mr-auto text-success">Success</strong>
+                    <small class="text-muted">just now</small>
+                    <button type="button" class="ml-2 mb-1 close" data-dismiss="toast" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="toast-body" th:text="${success}"></div>
+            </div>
         </div>
-        <div class="toast-body" th:text="${err.getMessage()}">
-        </div>
-      </div>
     </th:block>
     <!-- Then put toasts within -->
-   <!--end toast-->
-  </div>
+    <!--end toast-->
+    <script>
+        let showToast = () => {
+            let toast = document.querySelector(".success-toast");
+            let toastEl = new bootstrap.Toast(toast, {
+                animation: true,
+                autohide: true,
+                delay: 4000
+            })
+            toastEl.show();
+        }
+        window.onload = () => {
+            showToast();
+        }
+    </script>
 </th:block>
 </html>

@@ -133,7 +133,7 @@ public class AppConfiguration implements WebMvcConfigurer, ApplicationContextAwa
     @Bean
     public MessageSource messageSource(){
         ResourceBundleMessageSource resourceBundleMessageSource = new ResourceBundleMessageSource();
-        resourceBundleMessageSource.setBasename("ValidatioMessages");
+        resourceBundleMessageSource.setBasename("ValidationMessages");
         return resourceBundleMessageSource;
     }
 

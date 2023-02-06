@@ -1,103 +1,91 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <!-- Vendor js -->
 <th:block th:fragment="vendor">
-  <script src="/assets/js/vendor.min.js"></script>
+    <script src="/assets/js/vendor.min.js"></script>
 </th:block>
 
 <!-- Third Party js-->
 <th:block th:fragment="chart">
-  <script src="/assets/libs/apexcharts/apexcharts.min.js"></script>
+    <script src="/assets/libs/apexcharts/apexcharts.min.js"></script>
 </th:block>
 <th:block th:fragment="jquery">
-  <script src="/assets/libs/peity/jquery.peity.min.js"></script>
-  <script src="/assets/libs/jquery-vectormap/jquery-jvectormap-1.2.2.min.js"></script>
-  <script src="/assets/libs/jquery-vectormap/jquery-jvectormap-us-merc-en.js"></script>
+    <script src="/assets/libs/peity/jquery.peity.min.js"></script>
+    <script src="/assets/libs/jquery-vectormap/jquery-jvectormap-1.2.2.min.js"></script>
+    <script src="/assets/libs/jquery-vectormap/jquery-jvectormap-us-merc-en.js"></script>
 
 </th:block>
 <!-- Dashboard init -->
 <th:block th:fragment="dashboard">
-  <script src="/assets/js/pages/dashboard-1.init.js"></script>
+    <script src="/assets/js/pages/dashboard-1.init.js"></script>
 </th:block>
 
 <!-- App js -->
 <th:block th:fragment="bootsrap">
-  <script src="/assets/js/app.min.js"></script>
+    <script src="/assets/js/app.min.js"></script>
 </th:block>
 <th:block th:fragment="datatable">
-  <script src="/assets/libs/datatables/jquery.dataTables.min.js"></script>
-  <script src="/assets/libs/datatables/dataTables.bootstrap4.js"></script>
-  <script src="/assets/libs/datatables/dataTables.responsive.min.js"></script>
-  <script src="/assets/libs/datatables/responsive.bootstrap4.min.js"></script>
-  <script src="/assets/libs/datatables/dataTables.buttons.min.js"></script>
-  <script src="/assets/libs/datatables/buttons.bootstrap4.min.js"></script>
-  <script src="/assets/libs/datatables/buttons.html5.min.js"></script>
-  <script src="/assets/libs/datatables/buttons.flash.min.js"></script>
-  <script src="/assets/libs/datatables/buttons.print.min.js"></script>
-  <script src="/assets/libs/datatables/dataTables.keyTable.min.js"></script>
-  <script src="/assets/libs/datatables/dataTables.select.min.js"></script>
-  <script src="/assets/libs/pdfmake/pdfmake.min.js"></script>
-  <script src="/assets/libs/pdfmake/vfs_fonts.js"></script>
-  <!-- third party js ends -->
+    <script src="/assets/libs/datatables/jquery.dataTables.min.js"></script>
+    <script src="/assets/libs/datatables/dataTables.bootstrap4.js"></script>
+    <script src="/assets/libs/datatables/dataTables.responsive.min.js"></script>
+    <script src="/assets/libs/datatables/responsive.bootstrap4.min.js"></script>
+    <script src="/assets/libs/datatables/dataTables.buttons.min.js"></script>
+    <script src="/assets/libs/datatables/buttons.bootstrap4.min.js"></script>
+    <script src="/assets/libs/datatables/buttons.html5.min.js"></script>
+    <script src="/assets/libs/datatables/buttons.flash.min.js"></script>
+    <script src="/assets/libs/datatables/buttons.print.min.js"></script>
+    <script src="/assets/libs/datatables/dataTables.keyTable.min.js"></script>
+    <script src="/assets/libs/datatables/dataTables.select.min.js"></script>
+    <script src="/assets/libs/pdfmake/pdfmake.min.js"></script>
+    <script src="/assets/libs/pdfmake/vfs_fonts.js"></script>
+    <!-- third party js ends -->
 
-  <!-- Datatables init -->
-  <script src="/assets/js/pages/datatables.init.js"></script>
+    <!-- Datatables init -->
+    <script src="/assets/js/pages/datatables.init.js"></script>
 </th:block>
 <th:block th:fragment="form-wizard">
-  <!-- Plugins js-->
-  <script src="/assets/libs/twitter-bootstrap-wizard/jquery.bootstrap.wizard.min.js"></script>
+    <!-- Plugins js-->
+    <script src="/assets/libs/twitter-bootstrap-wizard/jquery.bootstrap.wizard.min.js"></script>
 
-  <!-- Init js-->
-  <script src="/assets/js/pages/form-wizard.init.js"></script>
+    <!-- Init js-->
+    <script src="/assets/js/pages/form-wizard.init.js"></script>
 </th:block>
 <th:block th:fragment="progress">
-  <script>
-    function clickNavBtn(){
-      let tId = setTimeout(changeBtn, 500);
-    }
-    function changeBtn(){
-        let progress = document.querySelector(".progress-bar").style.width;
-        let nextBtn = document.querySelector(".next-btn");
-        if (progress!=='100%'){
-          nextBtn.children[0].innerText = "Next";
-          nextBtn.removeAttribute("type");
-          nextBtn.setAttribute("onclick", "clickNavBtn()");
-        }else {
-          nextBtn.children[0].innerText = "Submit";
-          nextBtn.setAttribute("type", "submit");
-          nextBtn.classList.remove("disabled");
-          nextBtn.setAttribute("onclick","submitForm()");
-        }
-    }
-    let submitForm = ()=>{
-      console.log(123)
-      document.querySelector("#create_form").submit();
-    }
-    let calculateTotal = () =>{
-      let amount = Number(document.querySelector("[name='amount']").value);
-      let fee = Number(document.querySelector("[name='feeRate']").value)/100;
-      let total = amount * fee + amount;
-      document.querySelector("[name='totalAmount']").value = total;
-    }
-    document.querySelector("[name='amount']").oninput = ()=>{calculateTotal()};
-    document.querySelector("[name='feeRate']").oninput = ()=>{calculateTotal()};
-  </script>
-</th:block>
-<th:block th:fragment="toast-trigger">
     <script>
-      let showToast = () => {
-        let toast = document.querySelectorAll(".toast");
-        toast.forEach(el => {
-          let toastEl = new bootstrap.Toast(el, {
-            animation: true,
-            autohide: true,
-            delay: 4000
-          })
-          toastEl.show();
-        })
-      }
-      window.onload = ()=>{
-        showToast();
-      }
+        function clickNavBtn() {
+            let tId = setTimeout(changeBtn, 500);
+        }
+
+        function changeBtn() {
+            let progress = document.querySelector(".progress-bar").style.width;
+            let nextBtn = document.querySelector(".next-btn");
+            if (progress !== '100%') {
+                nextBtn.children[0].innerText = "Next";
+                nextBtn.removeAttribute("type");
+                nextBtn.setAttribute("onclick", "clickNavBtn()");
+            } else {
+                nextBtn.children[0].innerText = "Submit";
+                nextBtn.setAttribute("type", "submit");
+                nextBtn.classList.remove("disabled");
+                nextBtn.setAttribute("onclick", "submitForm()");
+            }
+        }
+
+        let submitForm = () => {
+            console.log(123)
+            document.querySelector("#create_form").submit();
+        }
+        let calculateTotal = () => {
+            let amount = Number(document.querySelector("[name='amount']").value);
+            let fee = Number(document.querySelector("[name='feeRate']").value) / 100;
+            let total = amount * fee + amount;
+            document.querySelector("[name='totalAmount']").value = total;
+        }
+        document.querySelector("[name='amount']").oninput = () => {
+            calculateTotal()
+        };
+        document.querySelector("[name='feeRate']").oninput = () => {
+            calculateTotal()
+        };
     </script>
 </th:block>
 </html>
