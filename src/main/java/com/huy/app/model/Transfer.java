@@ -21,14 +21,18 @@ public class Transfer {
     @PrimaryKeyJoinColumn(name = "recipientId", foreignKey = @ForeignKey(name = "fk_recipient_customer"))
     @NotNull(message = "The recipient is not valid")
     private Customer receivedCustomer;
+
     @NotNull(message = "The fee rate is not valid")
     @Range(min = 0, max = 50,message = "Rate must be between 0 and 50%")
     private double feeRate;
+
     @NotNull(message = "The amount is not valid")
     @Range(min = 10000,max = 1000000000, message = "Transfer amount must be from 10000 to 1 billion")
     private double amount;
+
     @NotNull(message = "The amount is not valid")
     private double feeAmount;
+
     @NotNull(message = "The total amount is not valid")
     private double totalAmount;
 

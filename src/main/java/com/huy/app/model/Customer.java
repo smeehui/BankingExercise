@@ -17,28 +17,35 @@ public class Customer {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
     //    @NotEmpty(message = "Full name can not be empty")
     @Valid
     @NotBlank(message = "Full name can not be empty")
     private String fullName;
+
     //    @NotEmpty(message = "Email can not be empty")
     @Valid
     @NotBlank(message = "Email can not be empty")
     @Email(message = "Email is not valid")
     private String email;
+
     //    @NotEmpty(message = "Phone can not be empty")
     @Valid
     @NotBlank(message = "Phone can not be empty")
     private String phone;
+
     //    @NotEmpty(message = "Address can not be empty")
     @Valid
     @NotBlank(message = "Address can not be empty")
     private String address;
+
     @Valid
     @Range(min=0,max = 999999999, message = "Balance is not valid")
     private double balance;
+
     @Column(name = "deleted", nullable = false, columnDefinition = "bit default 0")
      private boolean deleted;
+
     public Customer() {
     }
 
