@@ -11,11 +11,11 @@ import javax.persistence.*;
 @Immutable
 @Subselect(value = "SELECT t.id as id,\n" +
                    "       t.amount,\n" +
-                   "       t.feeAmount,\n" +
-                   "       t.feeRate,\n" +
-                   "       t.totalAmount,\n" +
-                   "       c.fullName  as sentCustomer,\n" +
-                   "       c2.fullName as receivedCustomer\n" +
+                   "       t.fees_amount,\n" +
+                   "       t.fees,\n" +
+                   "       t.transfer_amount,\n" +
+                   "       c.full_name  as sentCustomer,\n" +
+                   "       c2.full_name as receivedCustomer\n" +
                    "FROM transfers t\n" +
                    "         JOIN customers c on c.id = t.sentCustomer_id\n" +
                    "         JOIN customers c2 on c2.id = t.receivedCustomer_id")
