@@ -23,8 +23,8 @@ public class CustomerController {
     @GetMapping("/list")
     public ModelAndView showListCustomer() {
         ModelAndView modelAndView = new ModelAndView("pages/customer/list");
-        List<Customer> customers = customerService.findAll();
-        modelAndView.addObject("customers", customers);
+//        List<Customer> customers = customerService.findAll();
+//        modelAndView.addObject("customers", customers);
         return modelAndView;
     }
 
@@ -54,14 +54,14 @@ public class CustomerController {
 
     @GetMapping("/delete/{id}")
     public String deleteCustomer(@PathVariable String id) {
-        Long idLong = null;
-        try {
-            idLong = Long.parseLong(id);
-        } catch (NumberFormatException e) {
-        }
-        Customer customer = customerService.findById(idLong);
-        customer.setDeleted(true);
-        customerService.save(customer);
+//        Long idLong = null;
+//        try {
+//            idLong = Long.parseLong(id);
+//        } catch (NumberFormatException e) {
+//        }
+//        Customer customer = customerService.findById(idLong);
+//        customer.setDeleted(true);
+//        customerService.save(customer);
         return "redirect:/customer";
     }
 

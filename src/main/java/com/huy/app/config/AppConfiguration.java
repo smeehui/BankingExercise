@@ -1,8 +1,6 @@
 package com.huy.app.config;
 
 
-import com.huy.app.repository.customer.CustomerRepository;
-import com.huy.app.repository.customer.ICustomerRepository;
 import com.huy.app.repository.transfer.ITransferDTORepository;
 import com.huy.app.repository.transfer.ITransferRepository;
 import com.huy.app.repository.transfer.TransferDTORepository;
@@ -22,6 +20,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.support.ResourceBundleMessageSource;
+import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 import org.springframework.jdbc.datasource.DriverManagerDataSource;
 import org.springframework.orm.jpa.JpaTransactionManager;
 import org.springframework.orm.jpa.JpaVendorAdapter;
@@ -45,6 +44,7 @@ import java.util.Properties;
 @Configuration
 @EnableWebMvc
 @EnableTransactionManagement
+@EnableJpaRepositories("com.huy.app.repository")
 @ComponentScan("com.huy.app.controller")
 public class AppConfiguration implements WebMvcConfigurer, ApplicationContextAware {
 
@@ -130,22 +130,19 @@ public class AppConfiguration implements WebMvcConfigurer, ApplicationContextAwa
     public void addResourceHandlers(ResourceHandlerRegistry registry) {
         registry.addResourceHandler("/assets/**").addResourceLocations("/assets/");
     }
+
     @Bean
     public MessageSource messageSource(){
         ResourceBundleMessageSource resourceBundleMessageSource = new ResourceBundleMessageSource();
         resourceBundleMessageSource.setBasename("ValidationMessages");
         return resourceBundleMessageSource;
     }
+//    @Bean
+//    public ICustomerService customerService(){
+//        ICustomerService customerService = new CustomerService();
+//        return customerService;
+//    }
 
-    @Bean
-    public ICustomerRepository customerRepository() {
-        return new CustomerRepository();
-    }
-
-    @Bean
-    public ICustomerService customerService() {
-        return new CustomerService();
-    }
     @Bean
     public ITransferService transferService(){return new TransferService();
     }

@@ -18,6 +18,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import javax.validation.Valid;
 import java.util.List;
+import java.util.Optional;
 
 @Controller
 @RequestMapping("/transfer")
@@ -52,19 +53,19 @@ public class TransferController {
     public String createCustomer(@Valid @ModelAttribute Transfer transfer, BindingResult bindingResult, Model model) {
 
         model.addAttribute("customers", customerService.findAll());
-        Customer sentCustomer = customerService.findById(transfer.getSentCustomer().getId());
-        Customer receivedCustomer = customerService.findById(transfer.getReceivedCustomer().getId());
-        if (sentCustomer == null) {
+        Optional <Customer> sentCustomer = customerService.findById(transfer.getSentCustomer().getId());
+        Optional <Customer> receivedCustomer = customerService.findById(transfer.getReceivedCustomer().getId());
+        if (!sentCustomer.isPresent()) {
             bindingResult.rejectValue("sentCustomer","error.customer","Sender's ID is null");
         }
-        if (receivedCustomer == null) {
+        if (receivedCustomer.isPresent()) {
             bindingResult.rejectValue("sentCustomer","error.customer","Recipient's ID is null");
         }
         if (sentCustomer != null && receivedCustomer != null) {
-            if (sentCustomer.getId().equals(receivedCustomer.getId())) {
+            if (sentCustomer.get().getId().equals(receivedCustomer.get().getId())) {
                 bindingResult.rejectValue("sentCustomer","error.customer","ID must be different");
             }
-            if (sentCustomer.getBalance()< transfer.getTotalAmount()){
+            if (sentCustomer.get().getBalance()< transfer.getTotalAmount()){
                 bindingResult.rejectValue("sentCustomer","error.customer","Sender's balance is not enough");
             }
         }
@@ -73,10 +74,10 @@ public class TransferController {
             return "/pages/transfer/create";
         }else {
             transferService.save(transfer);
-            sentCustomer.setBalance(sentCustomer.getBalance() - transfer.getTotalAmount());
-            receivedCustomer.setBalance(receivedCustomer.getBalance() + transfer.getAmount());
-            customerService.save(sentCustomer);
-            customerService.save(receivedCustomer);
+            sentCustomer.get().setBalance(sentCustomer.get().getBalance() - transfer.getTotalAmount());
+            receivedCustomer.get().setBalance(receivedCustomer.get().getBalance() + transfer.getAmount());
+            customerService.save(sentCustomer.get());
+            customerService.save(receivedCustomer.get());
             model.addAttribute("success", "New transfer is created successfully");
             addAttr(model);
             return "/pages/transfer/create";

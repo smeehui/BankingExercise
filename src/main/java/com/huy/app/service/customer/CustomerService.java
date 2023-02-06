@@ -3,30 +3,34 @@ package com.huy.app.service.customer;
 import com.huy.app.model.Customer;
 import com.huy.app.repository.customer.ICustomerRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
+@Service
 public class CustomerService implements ICustomerService {
     @Autowired
     private ICustomerRepository customerRepository;
 
+
     @Override
-    public List<Customer> findAll() {
-        return customerRepository.findAll();
+    public Iterable<Customer> findAll() {
+        return null;
     }
 
     @Override
-    public Customer findById(Long id) {
-        return customerRepository.findById(id);
+    public Optional<Customer> findById(Long id) {
+        return Optional.empty();
     }
 
     @Override
     public void save(Customer customer) {
-        customerRepository.save(customer);
+
     }
 
     @Override
     public void remove(Long id) {
-        customerRepository.remove(id);
+
     }
 }
