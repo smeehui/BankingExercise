@@ -1,6 +1,6 @@
 package com.huy.app.controller.customer;
 
-import com.huy.app.model.Customer;
+import  com.huy.app.model.Customer;
 import com.huy.app.service.customer.ICustomerService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -23,8 +23,8 @@ public class CustomerController {
     @GetMapping("/list")
     public ModelAndView showListCustomer() {
         ModelAndView modelAndView = new ModelAndView("pages/customer/list");
-//        List<Customer> customers = customerService.findAll();
-//        modelAndView.addObject("customers", customers);
+        Iterable<Customer> customers = customerService.findAll();
+        modelAndView.addObject("customers", customers);
         return modelAndView;
     }
 

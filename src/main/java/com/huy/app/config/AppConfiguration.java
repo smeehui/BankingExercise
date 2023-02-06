@@ -45,7 +45,7 @@ import java.util.Properties;
 @EnableWebMvc
 @EnableTransactionManagement
 @EnableJpaRepositories("com.huy.app.repository")
-@ComponentScan("com.huy.app.controller")
+@ComponentScan("com.huy.app")
 public class AppConfiguration implements WebMvcConfigurer, ApplicationContextAware {
 
     private ApplicationContext applicationContext;

@@ -4,6 +4,7 @@ import org.hibernate.validator.constraints.Range;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
+import java.math.BigDecimal;
 
 @Entity
 @Table(name = "transfers")
@@ -24,22 +25,25 @@ public class Transfer {
 
     @NotNull(message = "The fee rate is not valid")
     @Range(min = 0, max = 50,message = "Rate must be between 0 and 50%")
-    private double feeRate;
+    @Column(name = "fees")
+    private BigDecimal feeRate;
 
     @NotNull(message = "The amount is not valid")
     @Range(min = 10000,max = 1000000000, message = "Transfer amount must be from 10000 to 1 billion")
-    private double amount;
+    private BigDecimal amount;
 
     @NotNull(message = "The amount is not valid")
-    private double feeAmount;
+    @Column(name = "fees_amount")
+    private BigDecimal feeAmount;
 
     @NotNull(message = "The total amount is not valid")
-    private double totalAmount;
+    @Column(name = "transfer_amount")
+    private BigDecimal totalAmount;
 
     public Transfer() {
     }
 
-    public Transfer(Long id, Customer sentCustomer, Customer receivedCustomer, double feeRate, double amount, double feeAmount, double totalAmount) {
+    public Transfer(Long id, Customer sentCustomer, Customer receivedCustomer, BigDecimal feeRate, BigDecimal amount, BigDecimal feeAmount, BigDecimal totalAmount) {
         this.id = id;
         this.sentCustomer = sentCustomer;
         this.receivedCustomer = receivedCustomer;
@@ -73,35 +77,35 @@ public class Transfer {
         this.receivedCustomer = receivedCustomer;
     }
 
-    public double getFeeRate() {
+    public BigDecimal getFeeRate() {
         return feeRate;
     }
 
-    public void setFeeRate(double feeRate) {
+    public void setFeeRate(BigDecimal feeRate) {
         this.feeRate = feeRate;
     }
 
-    public double getAmount() {
+    public BigDecimal getAmount() {
         return amount;
     }
 
-    public void setAmount(double amount) {
+    public void setAmount(BigDecimal amount) {
         this.amount = amount;
     }
 
-    public double getFeeAmount() {
+    public BigDecimal getFeeAmount() {
         return feeAmount;
     }
 
-    public void setFeeAmount(double feeAmount) {
+    public void setFeeAmount(BigDecimal feeAmount) {
         this.feeAmount = feeAmount;
     }
 
-    public double getTotalAmount() {
+    public BigDecimal getTotalAmount() {
         return totalAmount;
     }
 
-    public void setTotalAmount(double totalAmount) {
+    public void setTotalAmount(BigDecimal totalAmount) {
         this.totalAmount = totalAmount;
     }
 }

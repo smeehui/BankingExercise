@@ -4,6 +4,7 @@ import com.huy.app.model.Transfer;
 import com.huy.app.repository.transfer.ITransferRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import java.math.BigDecimal;
 import java.util.List;
 
 public class TransferService implements ITransferService {
@@ -22,8 +23,8 @@ public class TransferService implements ITransferService {
 
     @Override
     public void save(Transfer transfer) {
-        transfer.setFeeAmount(transfer.getAmount() * transfer.getFeeRate()/100);
-        transfer.setTotalAmount(transfer.getAmount() + transfer.getAmount() * transfer.getFeeRate()/100);
+        transfer.setFeeAmount(transfer.getAmount().multiply(transfer.getFeeRate().divide(BigDecimal.valueOf(100))));
+        transfer.setTotalAmount(transfer.getAmount().add(transfer.getAmount().multiply(transfer.getFeeRate().divide(BigDecimal.valueOf(100)))));
         transferRepository.save(transfer);
     }
 

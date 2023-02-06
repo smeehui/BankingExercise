@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.validation.Valid;
+import java.math.BigDecimal;
 import java.util.List;
 import java.util.Optional;
 
@@ -65,7 +66,7 @@ public class TransferController {
             if (sentCustomer.get().getId().equals(receivedCustomer.get().getId())) {
                 bindingResult.rejectValue("sentCustomer","error.customer","ID must be different");
             }
-            if (sentCustomer.get().getBalance()< transfer.getTotalAmount()){
+            if (sentCustomer.get().getBalance().compareTo(transfer.getTotalAmount())<0){
                 bindingResult.rejectValue("sentCustomer","error.customer","Sender's balance is not enough");
             }
         }
@@ -74,8 +75,8 @@ public class TransferController {
             return "/pages/transfer/create";
         }else {
             transferService.save(transfer);
-            sentCustomer.get().setBalance(sentCustomer.get().getBalance() - transfer.getTotalAmount());
-            receivedCustomer.get().setBalance(receivedCustomer.get().getBalance() + transfer.getAmount());
+            sentCustomer.get().setBalance(sentCustomer.get().getBalance().subtract(transfer.getTotalAmount()));
+            receivedCustomer.get().setBalance(receivedCustomer.get().getBalance().add(transfer.getAmount()));
             customerService.save(sentCustomer.get());
             customerService.save(receivedCustomer.get());
             model.addAttribute("success", "New transfer is created successfully");

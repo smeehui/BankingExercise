@@ -7,7 +7,7 @@ group 'com.huy.app'
 version '1.0-SNAPSHOT'
 
 repositories {
-    mavenCentral()
+    jcenter()
 }
 
 ext {
@@ -22,9 +22,12 @@ tasks.withType(JavaCompile) {
 }
 
 dependencies {
+    implementation group: 'org.hibernate', name: 'hibernate-core', version: '5.6.14.Final'
     compileOnly('javax:javaee-web-api:8.0.1')
     implementation('org.hibernate.validator:hibernate-validator:6.2.0.Final')
     implementation group: 'javax.validation', name: 'validation-api', version: '2.0.1.Final'
+    implementation group: 'org.hibernate', name: 'hibernate-entitymanager', version: '5.6.14.Final'
+
 
     providedCompile group: 'javax.servlet', name: 'javax.servlet-api', version: '4.0.1'
     implementation group: 'org.springframework', name: 'spring-core', version: '5.3.2'
@@ -34,8 +37,7 @@ dependencies {
     implementation group: 'org.springframework', name: 'spring-webmvc', version: '5.3.2'
     implementation group: 'org.thymeleaf', name: 'thymeleaf-spring5', version: '3.0.11.RELEASE'
     implementation group: 'nz.net.ultraq.thymeleaf', name: 'thymeleaf-layout-dialect', version: '2.5.2'
-    implementation group: 'org.hibernate', name: 'hibernate-core', version: '5.3.0.Final'
-    implementation group: 'org.hibernate', name: 'hibernate-entitymanager', version: '5.3.0.Final'
+
     implementation group: 'org.springframework', name: 'spring-orm', version: '5.3.2'
     implementation group: 'mysql', name: 'mysql-connector-java', version: '8.0.22'
     implementation group: 'org.springframework.data', name: 'spring-data-jpa', version: '2.4.2'

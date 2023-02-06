@@ -10,6 +10,7 @@ import javax.validation.constraints.DecimalMin;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotEmpty;
+import java.math.BigDecimal;
 
 @Entity
 @Table(name = "customers")
@@ -21,6 +22,7 @@ public class Customer {
     //    @NotEmpty(message = "Full name can not be empty")
     @Valid
     @NotBlank(message = "Full name can not be empty")
+    @Column(name = "full_name")
     private String fullName;
 
     //    @NotEmpty(message = "Email can not be empty")
@@ -41,7 +43,7 @@ public class Customer {
 
     @Valid
     @Range(min=0,max = 999999999, message = "Balance is not valid")
-    private double balance;
+    private BigDecimal balance;
 
     @Column(name = "deleted", nullable = false, columnDefinition = "bit default 0")
      private boolean deleted;
@@ -54,7 +56,7 @@ public class Customer {
                     @Valid @NotBlank @Email String email,
                     @Valid @NotBlank String phone,
                     @Valid @NotBlank String address,
-                    double balance,
+                    BigDecimal balance,
                     boolean deleted) {
         this.id = id;
         this.fullName = fullName;
@@ -73,11 +75,11 @@ public class Customer {
         this.deleted = deleted;
     }
 
-    public double getBalance() {
+    public BigDecimal getBalance() {
         return balance;
     }
 
-    public void setBalance(double balance) {
+    public void setBalance(BigDecimal balance) {
         this.balance = balance;
     }
 
